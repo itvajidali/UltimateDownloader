@@ -85,14 +85,17 @@ def download_thread(job_id, url, format_type='audio'):
             'quiet': True,
             'progress_hooks': [progress_hook],
             'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
         }
         
         # Anti-Bot: Use cookies.txt if present
-        if os.path.exists('cookies.txt'):
-            ydl_opts['cookiefile'] = 'cookies.txt'
+        cookie_path = os.path.join(os.getcwd(), 'cookies.txt')
+        if os.path.exists(cookie_path):
+            ydl_opts['cookiefile'] = cookie_path
         else:
             # Fallback for local PC: Try to use browser cookies (Experimental)
-            # This helps if running locally without a cookies file
             try:
                 ydl_opts['cookiesfrombrowser'] = ('chrome',) 
             except:
