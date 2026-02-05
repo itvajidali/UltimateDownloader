@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UltimateDownloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Replaced restricted FontAwesome script with public CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> <!-- Fixes Favicon 404 -->
+</head>
+
+<body>
+    <div class="background-blobs"></div>
+    <div class="container">
+        <header>
+            <h1>Ultimate<span class="highlight">Downloader</span></h1>
+            <p>Convert YouTube videos to high-quality MP3s instantly.</p>
+        </header>
+
+        <div class="input-group">
+            <select id="formatSelect">
+                <option value="audio">Audio (MP3)</option>
+                <option value="video">Video (MP4)</option>
+            </select>
+            <input type="text" id="urlInput" placeholder="Paste YouTube URL here..." autocomplete="off">
+            <button id="getInfoBtn">
+                <span class="btn-text">Get Info</span>
+            </button>
+        </div>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p id="loadingText">Processing...</p>
+            <div id="progress-container" class="progress-container hidden">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <p id="progress-text">0%</p>
+        </div>
+
+        <div id="resultArea" class="hidden">
+            <div class="card">
+                <img id="thumbnail" src="" alt="Video Thumbnail">
+                <div class="info">
+                    <h2 id="videoTitle">Video Title</h2>
+                    <p class="meta"><span id="uploader">Channel</span> • <span id="duration">00:00</span></p>
+                    <button id="downloadBtn" class="download-btn">Download MP3</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="message" class="hidden"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
