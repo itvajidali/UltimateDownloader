@@ -86,6 +86,17 @@ def download_thread(job_id, url, format_type='audio'):
             'progress_hooks': [progress_hook],
             'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
         }
+        
+        # Anti-Bot: Use cookies.txt if present
+        if os.path.exists('cookies.txt'):
+            ydl_opts['cookiefile'] = 'cookies.txt'
+        else:
+            # Fallback for local PC: Try to use browser cookies (Experimental)
+            # This helps if running locally without a cookies file
+            try:
+                ydl_opts['cookiesfrombrowser'] = ('chrome',) 
+            except:
+                pass
 
         if format_type == 'video':
             # Video Options (Best Video + Best Audio -> MP4)
